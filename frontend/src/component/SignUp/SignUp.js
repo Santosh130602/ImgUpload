@@ -87,7 +87,7 @@ const Signup = () => {
     
     try {
       // Send POST request to your backend server
-      const response = await axios.post('http://localhost:8000/auth/SignUp', {
+      const response = await axios.post('https://imgupload-6fbc.onrender.com/auth/SignUp', {
         email,
         password,
         confirmPassword
