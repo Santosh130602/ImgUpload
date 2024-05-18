@@ -181,22 +181,6 @@
 
 
 
-// import React, { useState } from 'react';
-// import { connect } from 'react-redux';
-// import { addImage } from '../../actions/imageActions';
-
-// const ImageUploader = ({ addImage }) => {
-//   // Your existing component code
-// };
-
-// const mapDispatchToProps = (dispatch) => ({
-//   addImage: (image) => dispatch(addImage(image)),
-// });
-
-// export default connect(null, mapDispatchToProps)(ImageUploader);
-
-
-
 
 
 
@@ -224,7 +208,7 @@ const ImageUploader = ({ addImage }) => {
 
   const fetchUploadedImages = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/upload/getImages');
+      const response = await axios.get('https://imgupload-6fbc.onrender.com/upload/getImages');
       setUploadedImages(response.data.images);
     } catch (error) {
       console.error('Error fetching uploaded images', error);
@@ -266,7 +250,7 @@ const ImageUploader = ({ addImage }) => {
     formData.append('imageFile', upload.imageFile);
 
     try {
-      const response = await axios.post('http://localhost:8000/upload/upImage', formData, {
+      const response = await axios.post('https://imgupload-6fbc.onrender.com/upload/upImage', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -281,7 +265,7 @@ const ImageUploader = ({ addImage }) => {
 
   const openModal = async (image) => {
     try {
-      const response = await axios.get(`http://localhost:8000/upload/getImage/${image._id}`);
+      const response = await axios.get(`https://imgupload-6fbc.onrender.com/upload/getImage/${image._id}`);
       setSelectedImage(response.data);
       setShowModal(true);
     } catch (error) {
