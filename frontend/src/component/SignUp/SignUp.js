@@ -72,6 +72,9 @@
 
 
 
+
+
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios'; // Import Axios library
@@ -81,9 +84,11 @@ const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [loading, setLoading] = useState(false); // Loading state
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // Set loading to true when request starts
     
     try {
       // Send POST request to your backend server
@@ -102,6 +107,8 @@ const Signup = () => {
     } catch (error) {
       // Handle error response from backend
       console.error('Signup failed:', error.response.data.message);
+    } finally {
+      setLoading(false); // Set loading to false when request completes
     }
   };
 
@@ -117,6 +124,7 @@ const Signup = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            disabled={loading} // Disable input during loading
           />
         </div>
         <div className="form-group">
@@ -127,6 +135,7 @@ const Signup = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            disabled={loading} // Disable input during loading
           />
         </div>
         <div className="form-group">
@@ -137,9 +146,12 @@ const Signup = () => {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
+            disabled={loading} // Disable input during loading
           />
         </div>
-        <button type="submit" className="signup-button">Signup</button>
+        <button type="submit" className="signup-button" disabled={loading}>
+          {loading ? 'Signing up...' : 'Signup'} {/* Show loading text */}
+        </button>
         <p className="login-redirect">
           Already have an account? <Link to="/login">Login here</Link>
         </p>
